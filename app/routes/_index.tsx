@@ -1,138 +1,183 @@
 import type { MetaFunction } from "@remix-run/node";
+import { Link } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "TechJobs - Your Gateway to Tech Opportunities" },
+    {
+      name: "description",
+      content:
+        "Discover curated tech opportunities from leading startups to established companies.",
+    },
   ];
 };
 
 export default function Index() {
+  const categories = [
+    { name: "Remote", icon: "🌎", filter: "location=remote" },
+    { name: "Design", icon: "🎨", filter: "role=design" },
+    { name: "Engineering", icon: "👩‍💻", filter: "role=engineering" },
+    { name: "Product", icon: "🚀", filter: "role=product" },
+    { name: "Data", icon: "📊", filter: "role=data" },
+  ];
+
   return (
-    <div className="flex h-screen items-center justify-center">
-      <div className="flex flex-col items-center gap-16">
-        <header className="flex flex-col items-center gap-9">
-          <h1 className="leading text-2xl font-bold text-gray-800 dark:text-gray-100">
-            Welcome to <span className="sr-only">Remix</span>
-          </h1>
-          <div className="h-[144px] w-[434px]">
-            <img
-              src="/logo-light.png"
-              alt="Remix"
-              className="block w-full dark:hidden"
-            />
-            <img
-              src="/logo-dark.png"
-              alt="Remix"
-              className="hidden w-full dark:block"
-            />
+    <div className="flex flex-col h-screen bg-gradient-to-br from-indigo-50 via-blue-50 to-purple-50 overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute top-0 right-0 w-64 h-64 bg-purple-200 rounded-full opacity-20 -mr-32 -mt-16"></div>
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-200 rounded-full opacity-20 -ml-40 -mb-40"></div>
+
+      {/* Navbar */}
+      <nav className="flex items-center justify-between px-8 py-4">
+        <div className="flex items-center">
+          <div className="h-10 w-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center shadow-md">
+            <span className="text-white font-bold text-xl">W</span>
           </div>
-        </header>
-        <nav className="flex flex-col items-center justify-center gap-4 rounded-3xl border border-gray-200 p-6 dark:border-gray-700">
-          <p className="leading-6 text-gray-700 dark:text-gray-200">
-            What&apos;s next?
+          <span className="ml-2 text-xl font-semibold bg-gradient-to-r from-blue-600 to-indigo-600 text-transparent bg-clip-text">
+            WorkWay
+          </span>
+        </div>
+        <div className="flex items-center space-x-6">
+          <Link
+            to="/jobs"
+            className="text-gray-600 hover:text-blue-600 transition"
+          >
+            Browse
+          </Link>
+          <button
+            disabled
+            className="text-gray-600 hover:text-blue-600 transition"
+          >
+            Companies
+          </button>
+          <button
+            disabled
+            className="text-gray-600 hover:text-blue-600 transition"
+          >
+            About
+          </button>
+          {/* <Link
+            to="/login"
+            className="px-5 py-2 bg-white text-blue-600 font-medium rounded-full border border-blue-100 shadow-sm hover:shadow-md transition"
+          >
+            Sign In
+          </Link> */}
+        </div>
+      </nav>
+
+      {/* Main Content Container */}
+      <div className="flex-1 flex flex-col items-center justify-center px-4">
+        {/* Hero Section */}
+        <div className="text-center max-w-2xl mx-auto">
+          <h1 className="text-5xl font-bold text-gray-900 leading-tight">
+            <span className="block">Discover Your</span>
+            <span className="block bg-gradient-to-r from-blue-600 to-indigo-600 text-transparent bg-clip-text">
+              Dream Tech Career
+            </span>
+          </h1>
+          <p className="mt-4 text-xl text-gray-600">
+            Curated opportunities from innovative startups to industry leaders.
           </p>
-          <ul>
-            {resources.map(({ href, text, icon }) => (
-              <li key={href}>
-                <a
-                  className="group flex items-center gap-3 self-stretch p-3 leading-normal text-blue-700 hover:underline dark:text-blue-500"
-                  href={href}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {icon}
-                  {text}
-                </a>
-              </li>
+
+          {/* Stats */}
+          <div className="mt-6 flex justify-center space-x-12">
+            <div>
+              <div className="text-3xl font-bold text-gray-900">10k+</div>
+              <div className="text-sm text-gray-500">Open Positions</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-gray-900">2.4k+</div>
+              <div className="text-sm text-gray-500">Companies</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-gray-900">8.5k+</div>
+              <div className="text-sm text-gray-500">Hired Monthly</div>
+            </div>
+          </div>
+
+          {/* Search Box */}
+          <div className="mt-8 relative max-w-xl mx-auto">
+            <div className="flex">
+              <input
+                type="text"
+                placeholder="Search positions..."
+                className="w-full px-6 py-4 rounded-l-full bg-white shadow-md border-0 focus:ring-2 focus:ring-blue-300 focus:outline-none"
+              />
+              <button className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-8 rounded-r-full shadow-md hover:shadow-lg transition">
+                Search
+              </button>
+            </div>
+
+            {/* Trending Tags */}
+            <div className="mt-4 flex justify-center flex-wrap">
+              <span className="text-sm text-gray-500 mr-2">Trending:</span>
+              <Link
+                to="/jobs?tag=remote"
+                className="text-sm text-blue-600 mr-3 hover:underline"
+              >
+                Remote
+              </Link>
+              <Link
+                to="/jobs?tag=ai"
+                className="text-sm text-blue-600 mr-3 hover:underline"
+              >
+                AI/ML
+              </Link>
+              <Link
+                to="/jobs?tag=startup"
+                className="text-sm text-blue-600 hover:underline"
+              >
+                Startups
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Category Cards */}
+        <div className="mt-10 mb-4">
+          <h2 className="text-xl font-semibold text-center text-gray-700 mb-6">
+            Explore by Category
+          </h2>
+          <div className="flex justify-center space-x-4">
+            {categories.map((category, index) => (
+              <Link
+                key={index}
+                to={`/jobs?${category.filter}`}
+                className="w-24 h-24 bg-white rounded-xl shadow-md p-3 flex flex-col items-center justify-center hover:shadow-lg transition"
+              >
+                <div className="h-10 w-10 rounded-full bg-blue-50 flex items-center justify-center mb-2">
+                  <span className="text-xl">{category.icon}</span>
+                </div>
+                <span className="font-medium text-gray-900 text-sm">
+                  {category.name}
+                </span>
+              </Link>
             ))}
-          </ul>
-        </nav>
+          </div>
+        </div>
       </div>
+
+      {/* Footer */}
+      <footer className="py-4 px-8 flex justify-between items-center">
+        <div className="text-sm text-gray-500">Built with ❤️ • v1.0</div>
+        <div className="flex space-x-4">
+          <a href="#" className="text-gray-400 hover:text-gray-600 transition">
+            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+          </a>
+          <a href="#" className="text-gray-400 hover:text-gray-600 transition">
+            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723 10.054 10.054 0 01-3.127 1.195 4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+            </svg>
+          </a>
+          <a href="#" className="text-gray-400 hover:text-gray-600 transition">
+            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+            </svg>
+          </a>
+        </div>
+      </footer>
     </div>
   );
 }
-
-const resources = [
-  {
-    href: "https://remix.run/start/quickstart",
-    text: "Quick Start (5 min)",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="20"
-        viewBox="0 0 20 20"
-        fill="none"
-        className="stroke-gray-600 group-hover:stroke-current dark:stroke-gray-300"
-      >
-        <path
-          d="M8.51851 12.0741L7.92592 18L15.6296 9.7037L11.4815 7.33333L12.0741 2L4.37036 10.2963L8.51851 12.0741Z"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    href: "https://remix.run/start/tutorial",
-    text: "Tutorial (30 min)",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="20"
-        viewBox="0 0 20 20"
-        fill="none"
-        className="stroke-gray-600 group-hover:stroke-current dark:stroke-gray-300"
-      >
-        <path
-          d="M4.561 12.749L3.15503 14.1549M3.00811 8.99944H1.01978M3.15503 3.84489L4.561 5.2508M8.3107 1.70923L8.3107 3.69749M13.4655 3.84489L12.0595 5.2508M18.1868 17.0974L16.635 18.6491C16.4636 18.8205 16.1858 18.8205 16.0144 18.6491L13.568 16.2028C13.383 16.0178 13.0784 16.0347 12.915 16.239L11.2697 18.2956C11.047 18.5739 10.6029 18.4847 10.505 18.142L7.85215 8.85711C7.75756 8.52603 8.06365 8.21994 8.39472 8.31453L17.6796 10.9673C18.0223 11.0653 18.1115 11.5094 17.8332 11.7321L15.7766 13.3773C15.5723 13.5408 15.5554 13.8454 15.7404 14.0304L18.1868 16.4767C18.3582 16.6481 18.3582 16.926 18.1868 17.0974Z"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    href: "https://remix.run/docs",
-    text: "Remix Docs",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="20"
-        viewBox="0 0 20 20"
-        fill="none"
-        className="stroke-gray-600 group-hover:stroke-current dark:stroke-gray-300"
-      >
-        <path
-          d="M9.99981 10.0751V9.99992M17.4688 17.4688C15.889 19.0485 11.2645 16.9853 7.13958 12.8604C3.01467 8.73546 0.951405 4.11091 2.53116 2.53116C4.11091 0.951405 8.73546 3.01467 12.8604 7.13958C16.9853 11.2645 19.0485 15.889 17.4688 17.4688ZM2.53132 17.4688C0.951566 15.8891 3.01483 11.2645 7.13974 7.13963C11.2647 3.01471 15.8892 0.951453 17.469 2.53121C19.0487 4.11096 16.9854 8.73551 12.8605 12.8604C8.73562 16.9853 4.11107 19.0486 2.53132 17.4688Z"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    href: "https://rmx.as/discord",
-    text: "Join Discord",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="20"
-        viewBox="0 0 24 20"
-        fill="none"
-        className="stroke-gray-600 group-hover:stroke-current dark:stroke-gray-300"
-      >
-        <path
-          d="M15.0686 1.25995L14.5477 1.17423L14.2913 1.63578C14.1754 1.84439 14.0545 2.08275 13.9422 2.31963C12.6461 2.16488 11.3406 2.16505 10.0445 2.32014C9.92822 2.08178 9.80478 1.84975 9.67412 1.62413L9.41449 1.17584L8.90333 1.25995C7.33547 1.51794 5.80717 1.99419 4.37748 2.66939L4.19 2.75793L4.07461 2.93019C1.23864 7.16437 0.46302 11.3053 0.838165 15.3924L0.868838 15.7266L1.13844 15.9264C2.81818 17.1714 4.68053 18.1233 6.68582 18.719L7.18892 18.8684L7.50166 18.4469C7.96179 17.8268 8.36504 17.1824 8.709 16.4944L8.71099 16.4904C10.8645 17.0471 13.128 17.0485 15.2821 16.4947C15.6261 17.1826 16.0293 17.8269 16.4892 18.4469L16.805 18.8725L17.3116 18.717C19.3056 18.105 21.1876 17.1751 22.8559 15.9238L23.1224 15.724L23.1528 15.3923C23.5873 10.6524 22.3579 6.53306 19.8947 2.90714L19.7759 2.73227L19.5833 2.64518C18.1437 1.99439 16.6386 1.51826 15.0686 1.25995ZM16.6074 10.7755L16.6074 10.7756C16.5934 11.6409 16.0212 12.1444 15.4783 12.1444C14.9297 12.1444 14.3493 11.6173 14.3493 10.7877C14.3493 9.94885 14.9378 9.41192 15.4783 9.41192C16.0471 9.41192 16.6209 9.93851 16.6074 10.7755ZM8.49373 12.1444C7.94513 12.1444 7.36471 11.6173 7.36471 10.7877C7.36471 9.94885 7.95323 9.41192 8.49373 9.41192C9.06038 9.41192 9.63892 9.93712 9.6417 10.7815C9.62517 11.6239 9.05462 12.1444 8.49373 12.1444Z"
-          strokeWidth="1.5"
-        />
-      </svg>
-    ),
-  },
-];
