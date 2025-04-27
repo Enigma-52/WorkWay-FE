@@ -3,7 +3,6 @@ import type { MetaFunction } from "@remix-run/node";
 export default function JobsPage() {
   return (
     <div className="min-h-screen">
-      {/* Header */}
       <header className="border-b border-gray-200 p-4 flex justify-between items-center">
         <div className="text-2xl font-bold text-blue-500">JobSearch</div>
         <div className="flex items-center space-x-4">
@@ -14,13 +13,10 @@ export default function JobsPage() {
         </div>
       </header>
 
-      {/* Main Content */}
       <div className="flex">
-        {/* Filters Sidebar (20-25% width) */}
         <aside className="w-1/4 p-6 border-r border-gray-200 sticky top-0 h-screen overflow-y-auto">
           <h2 className="text-xl font-semibold mb-6">Filters</h2>
 
-          {/* Role Type Filter */}
           <div className="mb-8">
             <h3 className="text-sm font-medium text-gray-700 mb-3">
               Role Type
