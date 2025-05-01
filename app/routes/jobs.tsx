@@ -24,7 +24,8 @@ export default function JobsPage() {
         ...Object.fromEntries(Object.entries(filters).filter(([_, v]) => v)),
       });
 
-      const res = await fetch(`${process.env.BACKEND_URL}/api/jobs?${query}`);
+      const backendUrl = window.ENV.BACKEND_URL;
+      const res = await fetch(`${backendUrl}/api/jobs?${query}`);
       if (!res.ok) throw new Error("Failed to fetch");
 
       const json = await res.json();

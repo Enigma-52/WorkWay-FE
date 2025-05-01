@@ -4,11 +4,25 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
-import type { LinksFunction } from "@remix-run/node";
+import {
+  json,
+  type LinksFunction,
+  type LoaderFunctionArgs,
+} from "@remix-run/node";
 import { Analytics } from "@vercel/analytics/remix";
 
 import "./tailwind.css";
+
+// 👇 loader to pass env variable to the client
+export function loader({ request }: LoaderFunctionArgs) {
+  return json({
+    ENV: {
+      BACKEND_URL: process.env.BACKEND_URL,
+    },
+  });
+}
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -24,6 +38,8 @@ export const links: LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const data = useLoaderData<typeof loader>();
+
   return (
     <html lang="en">
       <head>
@@ -34,6 +50,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         {children}
+        {/* 👇 inject ENV into window object */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.ENV = ${JSON.stringify(data.ENV)};`,
+          }}
+        />
         <Analytics />
         <ScrollRestoration />
         <Scripts />
