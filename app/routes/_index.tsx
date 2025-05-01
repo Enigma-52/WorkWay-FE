@@ -3,32 +3,19 @@ import { Link } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "TechJobs - Your Gateway to Tech Opportunities" },
+    { title: "WorkWay - Your Gateway to Tech Opportunities" },
     {
       name: "description",
       content:
-        "Discover curated tech opportunities from leading startups to established companies.",
+        "Find all tech jobs in one place. No more jumping between Greenhouse, Lever, and company career pages.",
     },
   ];
 };
 
 export default function Index() {
-  const categories = [
-    { name: "Remote", icon: "🌎", filter: "location=remote" },
-    { name: "Design", icon: "🎨", filter: "role=design" },
-    { name: "Engineering", icon: "👩‍💻", filter: "role=engineering" },
-    { name: "Product", icon: "🚀", filter: "role=product" },
-    { name: "Data", icon: "📊", filter: "role=data" },
-  ];
-
   return (
-    <div className="flex flex-col h-screen bg-gradient-to-br from-indigo-50 via-blue-50 to-purple-50 overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-purple-200 rounded-full opacity-20 -mr-32 -mt-16"></div>
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-200 rounded-full opacity-20 -ml-40 -mb-40"></div>
-
-      {/* Navbar */}
-      <nav className="flex items-center justify-between px-8 py-4">
+    <div className="flex flex-col min-h-screen bg-gradient-to-br from-indigo-50 via-blue-50 to-purple-50 overflow-hidden">
+      <nav className="flex items-center justify-between px-8 py-4 relative z-10">
         <div className="flex items-center">
           <div className="h-10 w-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center shadow-md">
             <span className="text-white font-bold text-xl">W</span>
@@ -37,129 +24,114 @@ export default function Index() {
             WorkWay
           </span>
         </div>
-        <div className="flex items-center space-x-6">
+        <div>
           <Link
             to="/jobs"
-            className="text-gray-600 hover:text-blue-600 transition"
+            className="text-gray-600 hover:text-blue-600 transition mr-6"
           >
             Browse
           </Link>
-          <button
-            disabled
-            className="text-gray-600 hover:text-blue-600 transition"
-          >
-            Companies
-          </button>
-          <button
-            disabled
-            className="text-gray-600 hover:text-blue-600 transition"
-          >
+          <Link to="#" className="text-gray-600 hover:text-blue-600 transition">
             About
-          </button>
-          {/* <Link
-            to="/login"
-            className="px-5 py-2 bg-white text-blue-600 font-medium rounded-full border border-blue-100 shadow-sm hover:shadow-md transition"
-          >
-            Sign In
-          </Link> */}
+          </Link>
         </div>
       </nav>
 
-      {/* Main Content Container */}
-      <div className="flex-1 flex flex-col items-center justify-center px-4">
-        {/* Hero Section */}
-        <div className="text-center max-w-2xl mx-auto">
-          <h1 className="text-5xl font-bold text-gray-900 leading-tight">
-            <span className="block">Discover Your</span>
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col items-center justify-center px-4 relative z-10">
+        <div className="text-center max-w-3xl mx-auto">
+          {/* Eye-catching Headline */}
+          <div className="bg-white bg-opacity-50 backdrop-filter backdrop-blur-sm py-3 px-6 rounded-lg inline-block mb-4">
+            <span className="text-sm font-medium text-indigo-600">
+              One place for all tech jobs
+            </span>
+          </div>
+
+          <h1 className="text-5xl font-bold text-gray-900 leading-tight mb-2">
+            <span className="block">Tired of bouncing between</span>
             <span className="block bg-gradient-to-r from-blue-600 to-indigo-600 text-transparent bg-clip-text">
-              Dream Tech Career
+              Greenhouse, Lever & career pages?
             </span>
           </h1>
-          <p className="mt-4 text-xl text-gray-600">
-            Curated opportunities from innovative startups to industry leaders.
+
+          <p className="mt-4 text-xl text-gray-600 max-w-xl mx-auto">
+            We aggregate{" "}
+            <span className="line-through inline-block mr-1">
+              all the boring job boards
+            </span>{" "}
+            tech opportunities in one beautiful place.
           </p>
 
           {/* Stats */}
-          <div className="mt-6 flex justify-center space-x-12">
-            <div>
+          <div className="mt-8 flex justify-center space-x-12 mb-8">
+            <div className="bg-white bg-opacity-70 backdrop-filter backdrop-blur-sm px-6 py-3 rounded-lg shadow-sm">
               <div className="text-3xl font-bold text-gray-900">10k+</div>
               <div className="text-sm text-gray-500">Open Positions</div>
             </div>
-            <div>
+            <div className="bg-white bg-opacity-70 backdrop-filter backdrop-blur-sm px-6 py-3 rounded-lg shadow-sm">
               <div className="text-3xl font-bold text-gray-900">2.4k+</div>
               <div className="text-sm text-gray-500">Companies</div>
             </div>
-            <div>
-              <div className="text-3xl font-bold text-gray-900">8.5k+</div>
-              <div className="text-sm text-gray-500">Hired Monthly</div>
-            </div>
           </div>
 
-          {/* Search Box */}
-          <div className="mt-8 relative max-w-xl mx-auto">
-            <div className="flex">
-              <input
-                type="text"
-                placeholder="Search positions..."
-                className="w-full px-6 py-4 rounded-l-full bg-white shadow-md border-0 focus:ring-2 focus:ring-blue-300 focus:outline-none"
-              />
-              <button className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-8 rounded-r-full shadow-md hover:shadow-lg transition">
-                Search
-              </button>
-            </div>
+          {/* Primary CTA Button */}
+          <div className="mt-8 relative">
+            <Link
+              to="/jobs"
+              className="relative px-8 py-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium rounded-full shadow-md hover:shadow-lg transition-all transform hover:scale-105 inline-flex items-center"
+            >
+              Find Your Dream Job
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 ml-2"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </Link>
+          </div>
 
-            {/* Trending Tags */}
-            <div className="mt-4 flex justify-center flex-wrap">
-              <span className="text-sm text-gray-500 mr-2">Trending:</span>
-              <Link
-                to="/jobs?tag=remote"
-                className="text-sm text-blue-600 mr-3 hover:underline"
-              >
-                Remote
-              </Link>
-              <Link
-                to="/jobs?tag=ai"
-                className="text-sm text-blue-600 mr-3 hover:underline"
-              >
-                AI/ML
-              </Link>
-              <Link
-                to="/jobs?tag=startup"
-                className="text-sm text-blue-600 hover:underline"
-              >
-                Startups
-              </Link>
-            </div>
+          {/* Testimonial-like tagline */}
+          <div className="mt-8 bg-white bg-opacity-60 backdrop-filter backdrop-blur-sm py-3 px-6 rounded-lg inline-block">
+            <p className="text-gray-700 italic">
+              "Finally, a job board that doesn't make me want to quit looking
+              for a job."
+            </p>
+            <p className="text-sm text-gray-500 mt-1">
+              — A relieved job seeker
+            </p>
           </div>
         </div>
 
-        {/* Category Cards */}
-        <div className="mt-10 mb-4">
-          <h2 className="text-xl font-semibold text-center text-gray-700 mb-6">
-            Explore by Category
-          </h2>
-          <div className="flex justify-center space-x-4">
-            {categories.map((category, index) => (
-              <Link
-                key={index}
-                to={`/jobs?${category.filter}`}
-                className="w-24 h-24 bg-white rounded-xl shadow-md p-3 flex flex-col items-center justify-center hover:shadow-lg transition"
-              >
-                <div className="h-10 w-10 rounded-full bg-blue-50 flex items-center justify-center mb-2">
-                  <span className="text-xl">{category.icon}</span>
-                </div>
-                <span className="font-medium text-gray-900 text-sm">
-                  {category.name}
-                </span>
-              </Link>
-            ))}
-          </div>
+        {/* Bottom Tags */}
+        <div className="mt-12 flex justify-center flex-wrap max-w-lg">
+          <span className="text-sm text-gray-500 mr-2">Popular searches:</span>
+          <span className="text-sm text-blue-600 mr-3 bg-blue-50 px-2 py-1 rounded-full">
+            Remote
+          </span>
+          <span className="text-sm text-blue-600 mr-3 bg-blue-50 px-2 py-1 rounded-full">
+            AI/ML
+          </span>
+          <span className="text-sm text-blue-600 mr-3 bg-blue-50 px-2 py-1 rounded-full">
+            Frontend
+          </span>
+          <span className="text-sm text-blue-600 bg-blue-50 px-2 py-1 rounded-full">
+            Startups
+          </span>
         </div>
       </div>
 
       {/* Footer */}
-      <footer className="py-4 px-8 flex justify-between items-center">
-        <div className="text-sm text-gray-500">Built with ❤️ • v1.0</div>
+      <footer className="py-6 px-8 flex justify-between items-center relative z-10 border-t border-gray-100">
+        <div className="text-sm text-gray-500">
+          <span className="font-medium text-indigo-600">WorkWay</span> • Built
+          with ❤️
+        </div>
         <div className="flex space-x-4">
           <a href="#" className="text-gray-400 hover:text-gray-600 transition">
             <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -169,11 +141,6 @@ export default function Index() {
           <a href="#" className="text-gray-400 hover:text-gray-600 transition">
             <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723 10.054 10.054 0 01-3.127 1.195 4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
-            </svg>
-          </a>
-          <a href="#" className="text-gray-400 hover:text-gray-600 transition">
-            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
             </svg>
           </a>
         </div>
