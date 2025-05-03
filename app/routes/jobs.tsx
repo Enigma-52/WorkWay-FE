@@ -1,4 +1,16 @@
+import type { MetaFunction } from "@remix-run/node";
 import { useEffect, useState, useRef, useCallback } from "react";
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "WorkWay - Your Gateway to Tech Opportunities" },
+    {
+      name: "description",
+      content:
+        "Find all tech jobs in one place. No more jumping between Greenhouse, Lever, and company career pages.",
+    },
+  ];
+};
 
 export default function JobsPage() {
   const [jobs, setJobs] = useState<any[]>([]);
